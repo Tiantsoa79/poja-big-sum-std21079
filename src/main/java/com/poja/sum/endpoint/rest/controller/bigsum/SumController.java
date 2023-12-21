@@ -4,21 +4,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigInteger;
+
 @RestController
 public class SumController {
 
   @GetMapping("/big-sum")
-  public String addition(@RequestParam("a") String a, @RequestParam("b") String b) {
-    try {
+  public String calculateBigSum(
+    @RequestParam("a") String a,
+    @RequestParam("b") String b) {
 
-      long numA = Long.parseLong(a);
-      long numB = Long.parseLong(b);
 
-      long sum = numA + numB;
+    BigInteger num1 = new BigInteger(a);
+    BigInteger num2 = new BigInteger(b);
 
-      return "The sum of " + numA + " and " + numB + " is : " + sum;
-    } catch (NumberFormatException e) {
-      return "Error : please, enter valid numbers.";
-    }
+
+    BigInteger sum = num1.add(num2);
+
+    return "The sum of\n" + num1 + " \nand\n" + num2 + " \nis\n" + sum + "\n";
   }
 }
